@@ -1,0 +1,76 @@
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup Page</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="signup-style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body>
+
+
+    <div class="container" id="login-container">
+
+        <h2>Login</h2>
+
+        <div class="form-group">
+            <label for="login-username">Username (Phone Number)</label>
+            <input type="text" id="login-username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" maxlength="5" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" onclick="login()">Login</button>
+        </div>
+
+        <div class="toggle-link">
+            <a href="#" onclick="toggleForm('signup')">Don't have an account? Sign up</a>
+        </div>
+
+        <div class="toggle-link">
+            <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+        </div>
+
+    </div>
+
+
+    <div class="container" id="signup-container" style="display: none;">
+
+        <h2>Sign Up</h2>
+
+        <div class="form-group">
+            <label for="signup-username">Username (Phone Number)</label>
+            <input type="text" id="signup-username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" maxlength="5" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" onclick="signup()">Sign Up</button>
+        </div>
+
+        <div class="toggle-link">
+            <a href="#" onclick="toggleForm('login')">Already have an account? Login</a>
+        </div>
+
+    </div>
+
+    <script src="signup-app.js"></script>
+
+</body>
+</html>

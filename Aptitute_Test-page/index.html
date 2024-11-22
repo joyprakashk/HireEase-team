@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireEase Test</title>
+    <link rel="stylesheet" href="style.css">   
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <h1>Aptitude Test</h1>
+        <p>This is a test to assess your aptitude for a job position.</p>
+
+        <div id="quiz-container">
+            <div class="question-container">
+                <p id="question"></p>
+                <div class="options" id="options"> 
+                </div>
+            </div>
+            <button id="next-btn" class="btn" onclick="nextQuestion()">Next Question</button>
+        </div>
+        
+        <div id="result-container" class="result-container">
+            <h2>Your Score: <span id="score"></span></h2>
+            <button id="restart-btn" class="btn" onclick="restartQuiz()">Restart</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+
+</body>
+</html>
