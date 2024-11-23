@@ -1,45 +1,80 @@
 import pandas as pd
-file_path = r'STD_data (1).xlsx'  
-data = pd.read_excel(file_path)
-data.columns = data.columns.str.strip().str.lower()
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
-def filter_candidates(data, institution=None, skills=None, area_of_interest=None, skill_match_threshold=0.5):
-    filtered_data = data.copy()
-    if institution:
-        filtered_data = filtered_data[
-            filtered_data['institution'].str.contains(institution, case=False, na=False)
-        ]
-    if area_of_interest:
-        filtered_data = filtered_data[
-            filtered_data['area of interest'].str.contains(area_of_interest, case=False, na=False)
-        ]
-    if skills:
-        skills = [skill.strip().lower() for skill in skills]
-        total_skills = len(skills)
-        if total_skills > 0:
-            filtered_data = filtered_data[
-                filtered_data['skills'].apply(
-                    lambda x: (
-                        sum(skill in x.lower() for skill in skills) / total_skills
-                    ) >= skill_match_threshold if pd.notnull(x) else False
-                )
-            ]
+# Load student data
+FILE_PATH = "selected.xlsx"  # Path to your Excel file
+students = pd.read_excel(FILE_PATH)
 
-    return filtered_data
+# SMTP Configuration (Update these with your credentials)
+SMTP_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
+SMTP_EMAIL = 'godgenoside@gmail.com'  # Replace with your email
+SMTP_PASSWORD = 'Nmit@123'        # Replace with your email's password
 
-institution_input = input("Enter institution name (or press Enter to skip): ").strip()
-skills_input = input("Enter skills (comma-separated, or press Enter to skip): ").strip().split(',') if input("Do you want to filter by skills? (yes/no): ").lower() == "yes" else None
-area_of_interest_input = input("Enter area of interest (or press Enter to skip): ").strip()
+# Function to send email
+def send_email(to_email, subject, message):
+    try:
+        msg = MIMEMultipart()
+        msg['From'] = SMTP_EMAIL
+        msg['To'] = to_email
+        msg['Subject'] = subject
+        msg.attach(MIMEText(message, 'plain'))
+        
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_EMAIL, SMTP_PASSWORD)
+            server.send_message(msg)
+        print(f"Email sent to {to_email} successfully.")
+    except Exception as e:
+        print(f"Failed to send email to {to_email}. Error: {e}")
 
-filtered_candidates = filter_candidates(
-    data,
-    institution=institution_input if institution_input else None,
-    skills=skills_input if skills_input else None,
-    area_of_interest=area_of_interest_input if area_of_interest_input else None,
-    skill_match_threshold=0.5  # Match at least 50% of skills
-)
-if not filtered_candidates.empty:
-    print("\nFiltered Candidates:")
-    print(filtered_candidates[['name', 'institution', 'skills', 'area of interest']])
-else:
-    print("\nNo candidates found matching the criteria.")
+# Function to approve a student
+def approve_student(student_name):
+    student = students[students['Name'] == student_name]
+    if not student.empty:
+        email = student.iloc[0]['mail']
+        send_email(
+            email,
+            "Application Approved",
+            f"Dear {student_name},\n\nCongratulations! Your application has been approved."
+        )
+        print(f"Student {student_name} has been approved.")
+    else:
+        print(f"Student {student_name} not found.")
+
+# Function to reject a student
+def reject_student(student_name):
+    student = students[students['Name'] == student_name]
+    if not student.empty:
+        email = student.iloc[0]['mail']
+        send_email(
+            email,
+            "Application Rejected",
+            f"Dear {student_name},\n\nWe regret to inform you that your application has been rejected."
+        )
+        print(f"Student {student_name} has been rejected.")
+    else:
+        print(f"Student {student_name} not found.")
+
+# Example Usage
+if __name__ == "__main__":
+    print("Student Management System")
+    print("1. Approve Student")
+    print("2. Reject Student")
+    print("3. Exit")
+    
+    while True:
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            name = input("Enter the student's name to approve: ")
+            approve_student(name)
+        elif choice == '2':
+            name = input("Enter the student's name to reject: ")
+            reject_student(name)
+        elif choice == '3':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
