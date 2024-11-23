@@ -53,30 +53,30 @@ def extract_text_from_docx(docx_file_path):
 
 def compare_resume_to_job(resume_file_content, company_skills):
     prompt = f"""
-     Compare the following two documents with a focus on skills alignment and provide a simple "Pass" or "Fail" result based on how well the resume matches the job requirements:
+         Please evaluate the following documents for skills alignment and determine a "Pass" or "Fail" result based on the outlined criteria:
 
-    **Document 1: Resume**
-    {resume_file_content}
+**Document 1: Resume**
+{resume_file_content}
 
-    **Document 2: Job Requirements**
-    {company_skills}
+**Document 2: Job Requirements**
+{company_skills}
 
-    Please evaluate the following:
+### Evaluation Criteria:
 
-    1. **Skills Match:** If more than 70% of the skills from the job requirements are present in the resume, return "Pass". If less than 70%, return "Fail".
-    2. if resume containes this data just pass it 
-    •	Programming Languages: Python, R, C
-•	Frameworks: TensorFlow, PyTorch, Keras, Scikit-learn, Streamlit
-•	Gen Al : Langchain, Llama index, LLMs, LLMOPS
-•	Al/ML: Machine Learning, Deep Learning, Natural Language Processing, Generative Al
-•	Data Science: Data Analysis, Data Visualization, Predictive Modeling
-•	Cloud Platforms: Cosmo Cloud, AWS, Google Cloud
-•	Tools: Git, VS Code, Jupyter Notebooks, Groq
-CERTIFICATIONS:
-
-    4. **only give the output as pass or fail.
-
-    If the resume passes, simply return "Pass". If the resume fails, return "Fail".
+2. **Missing Skills (if Fail):** Identify only the critical skills from the job requirements that are missing in the resume.
+3. **Recommendation (if Fail):** Suggest one or two brief, actionable improvements to align the resume better with the job requirements.
+1. **Skills Match:** 
+   - If **70% or more** of the skills from the job requirements are present in the resume, return "Pass."
+   - If the resume includes **all of the following key skills**, automatically return "Pass":
+     - Programming Languages: Python, R, C
+     - Frameworks: TensorFlow, PyTorch, Keras, Scikit-learn, Streamlit
+     - Gen AI: Langchain, Llama Index, LLMs, LLMOps
+     - AI/ML: Machine Learning, Deep Learning, Natural Language Processing, Generative AI
+     - Data Science: Data Analysis, Data Visualization, Predictive Modeling
+     - Cloud Platforms: Cosmo Cloud, AWS, Google Cloud
+     - Tools: Git, VS Code, Jupyter Notebooks, Groq
+   - If neither condition is met, return "Fail."
+     output "Pass" or "Fail." Do include additional explanations like missing skills and recommendation.
     """
     response = model.generate_content([prompt])
     
