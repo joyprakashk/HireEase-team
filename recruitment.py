@@ -3,17 +3,14 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Load student data
-FILE_PATH = "selected.xlsx"  # Path to your Excel file
+FILE_PATH = "selected.xlsx"  #
 students = pd.read_excel(FILE_PATH)
 
-# SMTP Configuration (Update these with your credentials)
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
-SMTP_EMAIL = 'godgenoside@gmail.com'  # Replace with your email
-SMTP_PASSWORD = 'Nmit@123'        # Replace with your email's password
+SMTP_EMAIL = 'godgenoside@gmail.com'  
+SMTP_PASSWORD = 'Nmit@123'        
 
-# Function to send email
 def send_email(to_email, subject, message):
     try:
         msg = MIMEMultipart()
@@ -30,7 +27,6 @@ def send_email(to_email, subject, message):
     except Exception as e:
         print(f"Failed to send email to {to_email}. Error: {e}")
 
-# Function to approve a student
 def approve_student(student_name):
     student = students[students['Name'] == student_name]
     if not student.empty:
@@ -44,7 +40,6 @@ def approve_student(student_name):
     else:
         print(f"Student {student_name} not found.")
 
-# Function to reject a student
 def reject_student(student_name):
     student = students[students['Name'] == student_name]
     if not student.empty:
@@ -57,8 +52,7 @@ def reject_student(student_name):
         print(f"Student {student_name} has been rejected.")
     else:
         print(f"Student {student_name} not found.")
-
-# Example Usage
+        
 if __name__ == "__main__":
     print("Student Management System")
     print("1. Approve Student")
