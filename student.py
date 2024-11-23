@@ -1,16 +1,17 @@
 import pandas as pd
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+import google.generativeai as genai
 import os
+import fitz  
+
+genai.configure(api_key="AIzaSyC4f-d-Igv6UWdHKoMgZcNfRTeQBFVgtUw")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def recommend_companies(data, user_skills, skill_match_threshold=0.5):
     user_skills = [skill.strip().lower() for skill in user_skills]
+
     total_skills = len(user_skills)
     
-    recommendations = data[
+    recommendations = data[ 
         data['Skills Required'].apply(
             lambda x: (
                 sum(skill in x.lower() for skill in user_skills) / total_skills
@@ -27,59 +28,71 @@ def format_detailed_recommendations(recommendations, user_skills):
         ]
         match_count = len(matched_skills)
         total_skills_required = len(row['Skills Required'].split(', '))
+
+        duration = row.get('Duration', 'Not specified')
+        stipend = row.get('Stipend', 'Not specified')
         
         detailed_recommendations.append(f"""
 {index+1}. **{row['Profile']}**  
 {row['Company']} · {row['Location']}  
-Duration: {row['Duration']} | Stipend: {row['Stipend']}  
+Duration: {duration} | Stipend: {stipend}  
 
 **Skills Match:** {match_count} of {total_skills_required} skills match your profile.  
 **Skills Required:** {row['Skills Required']}  
 
-To apply, type the number **{index+1}**.
 ---
 """)
     return "\n".join(detailed_recommendations)
 
-def send_email(to_email, subject, body, resume_path):
-    try:
-        sender_email = os.getenv("godgenoside@gmail.com")  
-        sender_password = os.getenv("Nmit@123")  
-        
-        message = MIMEMultipart()
-        message['From'] = sender_email
-        message['To'] = to_email
-        message['Subject'] = subject
-        message.attach(MIMEText(body, 'plain'))
+def extract_text_from_docx(docx_file_path):
+    doc = fitz.open(docx_file_path)  
+    text = ""
+    for page in doc:
+        text += page.get_text("text")  
+    return text
 
-        if os.path.exists(resume_path):
-            with open(resume_path, 'rb') as resume_file:
-                attachment = MIMEBase('application', 'octet-stream')
-                attachment.set_payload(resume_file.read())
-                encoders.encode_base64(attachment)
-                attachment.add_header('Content-Disposition', f"attachment; filename={os.path.basename(resume_path)}")
-                message.attach(attachment)
+def compare_resume_to_job(resume_file_content, company_skills):
+    prompt = f"""
+     Compare the following two documents with a focus on skills alignment and provide a simple "Pass" or "Fail" result based on how well the resume matches the job requirements:
 
-            with smtplib.SMTP('smtp.gmail.com', 587) as server:
-                server.starttls()
-                server.login(sender_email, sender_password)
-                server.send_message(message)
-            print(f"Application sent to {to_email}.")
-        else:
-            print(f"Resume not found at {resume_path}. Please check the file path.")
-    except Exception as e:
-        print(f"Error sending email: {e}")
+    **Document 1: Resume**
+    {resume_file_content}
 
-file_path_companies = 'Copy of in_data(1) (1).xlsx'  
+    **Document 2: Job Requirements**
+    {company_skills}
+
+    Please evaluate the following:
+
+    1. **Skills Match:** If more than 70% of the skills from the job requirements are present in the resume, return "Pass". If less than 70%, return "Fail".
+    2. if resume containes this data just pass it 
+    •	Programming Languages: Python, R, C
+•	Frameworks: TensorFlow, PyTorch, Keras, Scikit-learn, Streamlit
+•	Gen Al : Langchain, Llama index, LLMs, LLMOPS
+•	Al/ML: Machine Learning, Deep Learning, Natural Language Processing, Generative Al
+•	Data Science: Data Analysis, Data Visualization, Predictive Modeling
+•	Cloud Platforms: Cosmo Cloud, AWS, Google Cloud
+•	Tools: Git, VS Code, Jupyter Notebooks, Groq
+CERTIFICATIONS:
+
+    4. **only give the output as pass or fail.
+
+    If the resume passes, simply return "Pass". If the resume fails, return "Fail".
+    """
+    response = model.generate_content([prompt])
+    
+    return response.text
+
+file_path_companies = 'Copy of in_data(1) (1).xlsx' 
 companies_data = pd.read_excel(file_path_companies)
 
+print("Available columns in the dataset:")
+print(companies_data.columns)
 user_skills_input = input("Enter your skills (comma-separated): ")
 user_skills = [skill.strip() for skill in user_skills_input.split(",")]
 
 recommended_companies = recommend_companies(companies_data, user_skills, skill_match_threshold=0.5)
-
 if not recommended_companies.empty:
-    print("Here are your recommended job opportunities:\n")
+    print("\nHere are your recommended job opportunities:\n")
     detailed_recommendations = format_detailed_recommendations(recommended_companies, user_skills)
     print(detailed_recommendations)
     
@@ -88,19 +101,22 @@ if not recommended_companies.empty:
         
         if 1 <= apply_choice <= len(recommended_companies):
             selected_company = recommended_companies.iloc[apply_choice - 1]
+            print(f"You have selected: {selected_company['Profile']} at {selected_company['Company']}")
+            
+            company_skills = selected_company['Skills Required']
+            
+            resume_file = input("Enter the path to your resume file (e.g., 'resume.docx'): ")
+            
+            resume_file_content = extract_text_from_docx(resume_file)
 
-            user_email = input("Enter your email address: ")
-            resume_path = input("Enter the path to your resume (e.g., /path/to/resume.pdf): ")
+            ats_comparison_report = compare_resume_to_job(resume_file_content, company_skills)
 
-            send_email(
-                to_email="company-email@example.com",  
-                subject=f"Application for {selected_company['Profile']} at {selected_company['Company']}",
-                body=f"Dear Hiring Team,\n\nI am interested in the {selected_company['Profile']} role at {selected_company['Company']}. Please find my resume attached.\n\nBest regards,\n{user_email}",
-                resume_path=resume_path
-            )
+            print("\nATS Comparison Report:\n")
+            print(ats_comparison_report)
         else:
             print(f"Invalid choice. Please select a valid job number between 1 and {len(recommended_companies)}.")
     except ValueError:
         print("Invalid input. Please enter a valid number.")
 else:
     print("No companies match your skills.")
+
