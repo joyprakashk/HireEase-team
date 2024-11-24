@@ -1,4 +1,6 @@
-# On-Campus Recruitment Management System (OCRMS)
+# HireEase : On-Campus Recruitment Management System (OCRMS)
+
+### This prototype has been made as a closed-sourced application by the team-members of 'BroCode' as part of the 'Go for GoFr' Hackathon under 'Open Innovation' track. ###
 
 ## Overview
 OCRMS is a web application designed to streamline and manage on-campus recruitment processes. The application provides separate interfaces for students and recruiters, allowing them to interact with the system based on their roles. Key features include profile management, job postings, placement exam scheduling, and real-time notifications.
@@ -30,7 +32,7 @@ OCRMS is a web application designed to streamline and manage on-campus recruitme
 
 ---
 
-## Tech Stack
+## **Tech Stack**
 - **Back-end**: Go
 - **Microservices**: GoFr framework
 - **Front-end**: HTML, CSS, Vanilla JavaScript, React.js (Running on Node.js)
@@ -40,8 +42,8 @@ OCRMS is a web application designed to streamline and manage on-campus recruitme
 
 ---
 
-### Setup Instructions
-## Prerequisites
+## **Setup Instructions**
+### Prerequisites
 1. Install Go (`>=1.20`).
 2. Install Python (`>=3.8`) for AI/ML models.
 3. Install Node.js and npm.
@@ -49,7 +51,7 @@ OCRMS is a web application designed to streamline and manage on-campus recruitme
 5. Zopdev CLI for deployment.
 6. Web browser (Chrome, Firefox are usually recommended) for front-end testing.
 
-## Steps to Run Locally
+### Steps to Run Locally
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/joyprakashk/HireEase-team.git
@@ -79,7 +81,7 @@ You **don’t** need to install or configure tools like webpack or Babel. They a
 
 ---
 
-### Directory Structure
+## Directory Structure
 OCRMS/
 ├── backend/                # Go backend services
 ├── frontend/               # HTML, CSS, and JS files
@@ -90,10 +92,17 @@ OCRMS/
 
 ---
 
-### Future Scope and Enhancements
+## Future Scope and Enhancements
 # Our app is fully scalable and new features and functionalities will be added in subsequent releases.
 - We plan to integrate real-time chat for student-recruiter communication.
 - We also plan to use analytics for job applications and placement exam performance.
 - We also plan to expand AI/ML models for candidate-job matching.
 
+---
+
+## Developers:
+-Joyprakash Kalita [joyprakashk28@gmail.com](mailto:joyprakashk28@gmail.com)
+-Satyam Gupta [issatyamgupta@gmail.com](mailto:issatyamgupta@gmail.com)
+-Srijan Ratogi 
+-P. Lohith [lohithcseng@gmail.com](mailto:lohithcseng@gmail.com)
 
