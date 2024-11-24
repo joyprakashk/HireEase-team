@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Chat App</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Options</h2>
+        <button id="openCodeEditor">Open Code Editor</button>
+        <button id="viewGithub">View GitHub Profiles</button>
+        <button id="toggleCameraButton">Camera on/off</button>
+        <button id="toggleMicButton">Mic on/off </button>
+        <button id="endCallButton">End call</button>
+
+        <h2>Room Controls</h2>
+        <input type="text" id="roomId" placeholder="Enter Room ID">
+        <button id="createRoom">Create Room</button>
+        <button id="joinRoom">Join Room</button>
+        <div id="createRoomStatus"></div>
+    </div>
+    
+    <div class="main">
+        <div id="videoContainer">
+            <video id="localVideo" autoplay muted playsinline></video>
+            <video id="remoteVideo" autoplay playsinline></video>
+        </div>
+
+        
+        <div id="codeEditor">
+            <textarea placeholder="Write your code here..."></textarea>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

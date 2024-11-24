@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Entry Form</title>
+    <link rel="stylesheet" href="details.css">
+    <style>
+        input[type="url"] {
+            color: #1e90ff;
+        }
+
+        input[type="url"]:focus {
+            border-color: #1e90ff;
+        }
+
+        input[type="tel"]:invalid {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Enter Details</h1>
+        <form id="detailsForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label>Gender</label>
+            <div class="gender-options">
+                <label class="gender-option">
+                    <input type="radio" name="gender" value="Male" required> Male
+                </label>
+                <label class="gender-option">
+                    <input type="radio" name="gender" value="Female" required> Female
+                </label>
+            </div>
+
+            <label for="branch">Branch</label>
+            <input type="text" id="branch" name="branch" placeholder="Enter your branch" required>
+
+            <label for="cgpa">CGPA</label>
+            <input type="number" id="cgpa" name="cgpa" placeholder="Enter your CGPA" step="0.01" min="0" max="10" required>
+
+            <div class="certificate">
+                <h4>Upload Your Certificates</h4>
+                <input type="file" id="certificate" name="certificates[]" multiple required>
+            </div>
+
+            <label for="github">GitHub Link</label>
+            <input type="url" id="github" name="github" placeholder="Enter your GitHub profile link" required pattern="https://.*\.(com|org|net)" title="URL should start with https:// and end with .com, .org, or .net">
+
+            <label for="linkedin">LinkedIn</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="Enter your LinkedIn profile link" required pattern="https://.*\.(com|org|net)" title="URL should start with https:// and end with .com, .org, or .net">
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" maxlength="10" required title="Phone number must be 10 digits">
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Enter your E-mail" required>
+
+            <div class="job-role-section">
+                <h3>Job Type/Role You Are Looking For</h3>
+                <input type="text" id="job-type" name="job-type" placeholder="Enter the job role you are looking for" required>
+            </div>
+
+            <label for="skills">Skills</label>
+            <input type="text" id="skills" name="skills" placeholder="Enter your skills" required>
+            <div id="skills-list"></div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('skills').addEventListener('input', function(event) {
+            const input = event.target;
+            const skillsList = document.getElementById('skills-list');
+            skillsList.innerHTML = '';
+            
+            if (input.value.trim()) {
+                const skills = input.value.split(',').map(skill => skill.trim().toLowerCase()).filter(skill => skill.length > 0);
+                skills.forEach(skill => {
+                    const span = document.createElement('span');
+                    span.className = 'skill-tag';
+                    span.textContent = skill;
+                    skillsList.appendChild(span);
+                });
+            }
+        });
+
+        document.getElementById('detailsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('http://localhost:3000/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('Form submitted successfully');
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
