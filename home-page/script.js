@@ -13,13 +13,15 @@ videoContainer.style.left = '53%';
 videoContainer.style.transform = 'translateX(-53%)';
 
 function toggleVideoPosition() {
-    if (videoContainer.style.transform === 'translateX(-53%)') {
-      videoContainer.style.transform = 'translateX(0)';  
+    if (videoContainer.style.left === '53%') {
+      videoContainer.style.left = '80%';
+      videoContainer.style.transform = 'translateX(0)';
     } else {
-      videoContainer.style.transform = 'translateX(-53%)'; 
+      videoContainer.style.left = '53%';
+      videoContainer.style.transform = 'translateX(-53%)';
     }
   }
-
+  
 function toggleVideoAndEditor(event) {
   const codeEditor = document.getElementById('codeEditor');
   if (event.target === openCodeEditor) {
@@ -38,6 +40,8 @@ function toggleVideoAndEditor(event) {
 const openCodeEditor = document.getElementById('openCodeEditor'); 
 const viewGithub = document.getElementById('viewGithub'); 
 
+openCodeEditor.addEventListener('click', toggleVideoPosition);
+viewGithub.addEventListener('click', toggleVideoPosition);
 openCodeEditor.addEventListener('click', toggleVideoAndEditor);
 viewGithub.addEventListener('click', toggleVideoAndEditor);
 

@@ -85,11 +85,12 @@ video {
 
 #codeEditor {
   display: none; 
-  width: 100%;
+  width: 70%;
   height: 400px;
   background-color: #f4f4f4;
   border: 1px solid #ccc;
   margin-top: 20px;
+  margin-right:290px;
 }
 
 #codeEditor textarea {
