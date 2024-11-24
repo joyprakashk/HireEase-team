@@ -3,7 +3,7 @@
 ### This prototype has been made as a closed-sourced application by the team-members of 'BroCode' as part of the 'Go for GoFr' Hackathon under 'Open Innovation' track. ###
 
 ## Overview
-OCRMS is a web application designed to streamline and manage on-campus recruitment processes. The application provides separate interfaces for students and recruiters, allowing them to interact with the system based on their roles. Key features include profile management, job postings, placement exam scheduling, and real-time notifications.
+**HireEase** is a web application designed to streamline and manage on-campus recruitment processes. The application provides separate interfaces for students and recruiters, allowing them to interact with the system based on their roles. Key features include profile management, job postings, placement exam scheduling, and real-time notifications.
 
 ---
 
@@ -101,8 +101,8 @@ OCRMS/
 ---
 
 ## Developers:
--Joyprakash Kalita [joyprakashk28@gmail.com](mailto:joyprakashk28@gmail.com)
--Satyam Gupta [issatyamgupta@gmail.com](mailto:issatyamgupta@gmail.com)
--Srijan Ratogi 
--P. Lohith [lohithcseng@gmail.com](mailto:lohithcseng@gmail.com)
+- Joyprakash Kalita [joyprakashk28@gmail.com](mailto:joyprakashk28@gmail.com)
+- Satyam Gupta [issatyamgupta@gmail.com](mailto:issatyamgupta@gmail.com)
+- Srijan Ratogi 
+- P. Lohith [lohithcseng@gmail.com](mailto:lohithcseng@gmail.com)
 
