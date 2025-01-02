@@ -1,6 +1,6 @@
 # HireEase : On-Campus Recruitment Management System (OCRMS)
 
-### This prototype has been made as a closed-sourced application by the team-members of 'BroCode' as part of the 'Go for GoFr' Hackathon under 'Open Innovation' track. ###
+### This prototype has been developed by the team members of 'BroCode' as part of the 'Go for GoFr' Hackathon under 'Open Innovation' track. ###
 
 [![YouTube](http://i.ytimg.com/vi/-wA7ZL77jW0/hqdefault.jpg)](https://www.youtube.com/watch?v=-wA7ZL77jW0)
 
