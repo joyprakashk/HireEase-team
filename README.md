@@ -2,7 +2,7 @@
 
 ### This prototype has been made as a closed-sourced application by the team-members of 'BroCode' as part of the 'Go for GoFr' Hackathon under 'Open Innovation' track. ###
 
-[![Watch the video](https://github.com/joyprakashk/HireEase-team/Demo-Video-Thumbnail.png)](https://github.com/joyprakashk/HireEase-team/blob/0b02311646c10c966a187d74f0e50ece090c5e42/Demo_video.mp4)
+[![YouTube](http://i.ytimg.com/vi/-wA7ZL77jW0/hqdefault.jpg)](https://www.youtube.com/watch?v=-wA7ZL77jW0)
 
 ## Overview
 **HireEase** is a web application designed to streamline and manage on-campus recruitment processes. The application provides separate interfaces for students and recruiters, allowing them to interact with the system based on their roles. Key features include profile management, job postings, placement exam scheduling, and real-time notifications.
