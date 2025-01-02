@@ -2,6 +2,8 @@
 
 ### This prototype has been made as a closed-sourced application by the team-members of 'BroCode' as part of the 'Go for GoFr' Hackathon under 'Open Innovation' track. ###
 
+[![Watch the video](https://github.com/joyprakashk/HireEase-team/Demo-Video-Thumbnail.png)](https://github.com/joyprakashk/HireEase-team/Demo-Video.mp4)
+
 ## Overview
 **HireEase** is a web application designed to streamline and manage on-campus recruitment processes. The application provides separate interfaces for students and recruiters, allowing them to interact with the system based on their roles. Key features include profile management, job postings, placement exam scheduling, and real-time notifications.
 
@@ -78,18 +80,6 @@ You **don’t** need to install or configure tools like webpack or Babel. They a
 **You’ll need to have Node 14.0.0 or later version on your local development machine** (but it’s not required on the server).
 
    
-
----
-
-## Directory Structure
-OCRMS/
-├── backend/                # Go backend services
-├── frontend/               # HTML, CSS, and JS files
-├── ml/                     # AI/ML models and scripts
-├── README.md               # Project documentation
-├── firebaseConfig.js       # Firebase configuration for authentication
-└── zopdev/                 # Zopdev deployment configurations
-
 ---
 
 ## Future Scope and Enhancements
