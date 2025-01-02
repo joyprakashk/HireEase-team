@@ -85,7 +85,7 @@ You **don’t** need to install or configure tools like webpack or Babel. They a
 ---
 
 ## Future Scope and Enhancements
-# Our app is fully scalable and new features and functionalities will be added in subsequent releases.
+ Our app is fully scalable and new features and functionalities will be added in subsequent releases.
 - We plan to integrate real-time chat for student-recruiter communication.
 - We also plan to use analytics for job applications and placement exam performance.
 - We also plan to expand AI/ML models for candidate-job matching.
