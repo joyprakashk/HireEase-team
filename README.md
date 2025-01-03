@@ -80,7 +80,6 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see Sign-in page o
 You **don’t** need to install or configure tools like webpack or Babel. They are preconfigured and hidden so that you can focus on the code.
 
 **You’ll need to have Node 14.0.0 or later version on your local development machine** (but it’s not required on the server).
-
    
 ---
 
@@ -95,6 +94,5 @@ You **don’t** need to install or configure tools like webpack or Babel. They a
 ## Developers:
 - Joyprakash Kalita [joyprakashk28@gmail.com](mailto:joyprakashk28@gmail.com)
 - Satyam Gupta [issatyamgupta@gmail.com](mailto:issatyamgupta@gmail.com)
-- Srijan Ratogi 
+- Srijan Ratogi [srastogi751@gmail.com](mailto:srastogi751@gmail.com)
 - P. Lohith [lohithcseng@gmail.com](mailto:lohithcseng@gmail.com)
-
